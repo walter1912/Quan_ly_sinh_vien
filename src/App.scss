@@ -1,0 +1,34 @@
+.main-color {
+    color: #bc221b;
+}
+:root {
+    --color-main: #bc221b;
+    --color-gray: #efefef;
+    --color-text: #111;
+    --color-bg: #edeaea;
+}
+.main-hover:hover {
+    background-color: transparent;
+    border-bottom:2px solid #bc221b;
+    // text-decoration: underline;
+}
+.text-hover:hover {
+    text-decoration: underline;
+}
+.btn-main {
+    background-color: #bc221b;
+    color: #fff;
+    border-radius: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &:hover {
+        background-color: #fff;
+        color:#bc221b;
+        // text-decoration: underline;
+    }
+}
+
+.App {
+    // background-color: #efeded;
+}
