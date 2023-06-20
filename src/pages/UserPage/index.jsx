@@ -54,7 +54,7 @@ const UserPage = (props) => {
     info: {},
     mes: "chưa tạo",
   });
-  const [oneGet, setOneGet] = useEffect(true);
+  const [oneGet, setOneGet] = useState(true);
   useEffect(() => {
     const fetchUserInformation = async () => {
       setOneGet(false);
