@@ -22,7 +22,7 @@ const KhoaPage = (props) => {
     async function handle() {
       await khoaRequest.getAll(dispatch);
     }
-    if(khoa.length < 2) handle();
+    handle();
   }, [khoa.length, dispatch]);
   return (
     <Grid container style={{display:'flex',  flexDirection: "column", alignItems:"center"}}>

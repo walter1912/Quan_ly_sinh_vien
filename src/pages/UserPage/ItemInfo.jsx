@@ -9,12 +9,12 @@ import {
 import { useState } from "react";
 
 const ItemInfo = (props) => {
-  let { Icon, desText, text, isEdit, onChange } = props;
+  let { icon, destext, text, isedit, onChange } = props;
   const [txtInp, setTxtInp] = useState(text);
-  const [readOnl, setReadOnl] = useState(!isEdit);
+  const [readOnl, setReadOnl] = useState(!isedit);
   return (
     <ListItem {...props}>
-      <ListItemIcon>{Icon}</ListItemIcon>
+      <ListItemIcon>{icon}</ListItemIcon>
       <div
         style={{
           display: "flex",
@@ -23,8 +23,8 @@ const ItemInfo = (props) => {
           alignItems: "center",
         }}
       >
-        <b style={{ display: "flex", flex: "20" }}>{desText}</b>
-        {isEdit ? (
+        <b style={{ display: "flex", flex: "20" }}>{destext}</b>
+        {isedit ? (
           <Input
             style={{
               display: "flex",

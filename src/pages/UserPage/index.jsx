@@ -173,8 +173,8 @@ const UserPage = (props) => {
         <h2>Thông tin cá nhân</h2>
         <List>
           <ItemInfo
-            Icon={<Badge />}
-            desText={"Tên người dùng: "}
+            icon={<Badge />}
+            destext={"Tên người dùng: "}
             text={currentUser.ten}
             onChange={(e) => {
               setCurrentUser((pre) => {
@@ -182,11 +182,11 @@ const UserPage = (props) => {
                 return { ...pre, ten };
               });
             }}
-            isEdit={isEdit}
+            isedit={isEdit}
           />
           <ItemInfo
-            Icon={<Source />}
-            desText={"Mã người dùng: "}
+            icon={<Source />}
+            destext={"Mã người dùng: "}
             text={currentUser.ma}
             onChange={(e) => {
               setCurrentUser((pre) => {
@@ -194,11 +194,11 @@ const UserPage = (props) => {
                 return { ...pre, ma };
               });
             }}
-            isEdit={isEdit}
+            isedit={isEdit}
           />
           <ItemInfo
-            Icon={<Cake />}
-            desText={"Ngày sinh: "}
+            icon={<Cake />}
+            destext={"Ngày sinh: "}
             text={moment(currentUser.ngaySinh).format("DD-MM-YYYY")}
             onChange={(e) => {
               setCurrentUser((pre) => {
@@ -206,11 +206,11 @@ const UserPage = (props) => {
                 return { ...pre, ngaySinh };
               });
             }}
-            isEdit={isEdit}
+            isedit={isEdit}
           />
           <ItemInfo
-            Icon={<Transgender />}
-            desText={"Giới tính: "}
+            icon={<Transgender />}
+            destext={"Giới tính: "}
             text={currentUser.gioiTinh}
             onChange={(e) => {
               setCurrentUser((pre) => {
@@ -218,11 +218,11 @@ const UserPage = (props) => {
                 return { ...pre, gioiTinh };
               });
             }}
-            isEdit={isEdit}
+            isedit={isEdit}
           />
           <ItemInfo
-            Icon={<AlternateEmail />}
-            desText={"Email: "}
+            icon={<AlternateEmail />}
+            destext={"Email: "}
             text={currentUser.email ?? "user@gmail.com"}
             onChange={(e) => {
               setCurrentUser((pre) => {
@@ -230,11 +230,11 @@ const UserPage = (props) => {
                 return { ...pre, email };
               });
             }}
-            isEdit={isEdit}
+            isedit={isEdit}
           />
           <ItemInfo
-            Icon={<Place />}
-            desText={"Địa chỉ: "}
+            icon={<Place />}
+            destext={"Địa chỉ: "}
             text={
               currentUser.address ??
               "Học viện Công nghệ Bưu chính Viễn thông Hà Nội"
@@ -245,7 +245,7 @@ const UserPage = (props) => {
                 return { ...pre, address };
               });
             }}
-            isEdit={isEdit}
+            isedit={isEdit}
           />
         </List>
         <MoreActions>
