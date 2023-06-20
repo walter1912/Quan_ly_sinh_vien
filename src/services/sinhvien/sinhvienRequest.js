@@ -1,6 +1,5 @@
 import { initialSinhVien } from "../../models";
 import axiosInstance from "../../utils/axiosInstance";
-import { getLocalStorage } from "../../utils/localStorage";
 import {
   changeCurrent,
   updateList,
@@ -12,7 +11,6 @@ import {
 export const sinhvienRequest = {
   create: async function (data, dispatch) {
     try {
-      let nextId = getLocalStorage("nextId");
       let url = "/SinhViens";
       const { maSV, tenSV, ngaySinh, gioiTinh, khoaId, giangVienId } = data;
       const dataPost = { maSV, tenSV, ngaySinh, gioiTinh, khoaId, giangVienId };

@@ -1,21 +1,14 @@
-import React from "react";
-import PropTypes from "prop-types";
 import {
-  Button,
-  Container,
   Divider,
   IconButton,
   List,
   ListItem,
   ListItemButton,
-  ListItemIcon,
-  ListItemText,
   Tooltip,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { khoaRequest } from "../../services/khoa/khoaRequest";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "@emotion/styled";
 import Grid from "@mui/material/Unstable_Grid2";
@@ -30,7 +23,7 @@ const KhoaPage = (props) => {
       await khoaRequest.getAll(dispatch);
     }
     if(khoa.length < 2) handle();
-  }, []);
+  }, [khoa.length, dispatch]);
   return (
     <Grid container style={{display:'flex',  flexDirection: "column", alignItems:"center"}}>
       <Grid xs={8}>

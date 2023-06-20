@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   getLocalStorage,
-  removeLocalStorage,
   setLocalStorage,
 } from "../../utils/localStorage";
 

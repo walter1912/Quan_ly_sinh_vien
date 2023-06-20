@@ -1,19 +1,15 @@
-import React from "react";
-import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { changeCurrent } from "../../../services/sinhvien/sinhvienSlice";
 import { sinhvienRequest } from "../../../services/sinhvien/sinhvienRequest";
 import { IconButton, TableCell, TableRow } from "@mui/material";
 import { Delete, Edit } from "@mui/icons-material";
 import moment from "moment";
-import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const SinhVien = (props) => {
   let sinhvien = props.sinhvien;
   const khoa = useSelector((state) => state.khoa);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   // kiểm tra phân quyền
   var disabled = true;

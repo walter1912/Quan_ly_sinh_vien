@@ -1,5 +1,3 @@
-import React from "react";
-import PropTypes from "prop-types";
 import { HrHeader } from "../../components/HrHeader";
 import CustomPagination from "../../components/CustomPagination";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,8 +12,8 @@ const AllPostPage = (props) => {
     async function handle() {
       await postRequest.getAll(dispatch);
     }
-    if (allPost.length < 0) handle();
-  }, []);
+    handle();
+  }, [dispatch]);
   return (
     <div>
       <HrHeader style={{ marginBottom: "20px" }}>

@@ -1,9 +1,7 @@
-import React from "react";
 import PropTypes from "prop-types";
-import { ListItem, ListItemButton, ListItemText } from "@mui/material";
+import { ListItem, ListItemButton } from "@mui/material";
 import { styled } from "@mui/material";
 import { Link } from "react-router-dom";
-import { LinkOff, RouteTwoTone } from "@mui/icons-material";
 import ToggleMenu from "./ToggleMenu";
 
 const STListItemButton = styled(ListItemButton)((props) => ({
@@ -22,8 +20,8 @@ const STLink = styled(Link)((props) => ({
 }));
 
 const ItemMenu = (props) => {
-  const { item, index, color } = props;
-  const { name, route, des, listMenu } = item;
+  const { item,  color } = props;
+  const { name, route, listMenu } = item;
 
   return (
     <ListItem disablePadding>

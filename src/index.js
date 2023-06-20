@@ -4,13 +4,13 @@ import "./index.css";
 
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
-import { store } from "~/app/store";
-import Loading from "~/components/Loading";
+import { store } from "./app/store";
+import Loading from "./components/Loading";
 import { BrowserRouter } from "react-router-dom";
 
 
 
-const App = lazy(() => import("~/App"));
+const App = lazy(() => import("./App"));
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   

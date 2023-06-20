@@ -62,7 +62,7 @@ export const postSlice = createSlice({
         const updateA = moment(a.updateAt);
         const updateB = moment(b.updateAt);
         if (type === "older") return updateA.isBefore(updateB);
-        if (type === "newer") return updateA.isAfter(updateB);
+        return updateA.isAfter(updateB);
       });
     },
   },

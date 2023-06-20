@@ -12,7 +12,7 @@ const EditPassword = styled(Stack)((props) => ({
 }));
 
 const FormPassword = (props) => {
-    const { user, editPassword } = props;
+    const { user } = props;
     const [oldPassword, setOldPassword] = useState("");
     const [errOldPassword, setErrOldPassword] = useState(true);
     const [newPassword, setNewPassword] = useState("");

@@ -1,5 +1,3 @@
-import React from "react";
-import PropTypes from "prop-types";
 import { Formik } from "formik";
 import { initialGiangVien } from "../../models";
 import CustomSnackbar from "../../components/CustomSnackbar";
@@ -28,7 +26,6 @@ import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { khoaRequest } from "../../services/khoa/khoaRequest";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
-import { userActions } from "../../services/user/userSlice";
 import ErrorPage from "../ErrorPage";
 
 const validationSchema = yup.object({
@@ -54,8 +51,8 @@ const CreateGiangVienpage = (props) => {
     async function handle() {
       await khoaRequest.getAll(dispatch);
     }
-    if (khoas.length < 0) handle();
-  }, []);
+    if (khoas.length < 1) handle();
+  }, [dispatch,khoas.length ]);
   const dataList = khoas.map((k) => ({ id: k.id, value: k.ten }));
   //kiểm tra xem là cập nhật hay tạo mới
   let { state } = useLocation();
@@ -77,11 +74,8 @@ const CreateGiangVienpage = (props) => {
     if (isEditGiangVien) handle();
     if (ma !== undefined) {
       setCurrentGiangVien((pre) => ({ ...pre, maGV: ma }));
-      console.log("currentGiangVien: ", currentGiangVien);
-      console.log("ma not undf", ma);
     }
-    console.log("ma", ma);
-  }, []);
+  }, [ma, isEditGiangVien, giangVienStore]);
 
   const [messageAlert, setMessageAlert] = useState("tạo thành công");
   const [severity, setSeverity] = useState("success");

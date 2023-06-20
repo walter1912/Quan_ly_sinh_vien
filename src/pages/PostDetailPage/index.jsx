@@ -22,7 +22,7 @@ import { postRequest } from "../../services/post/postRequest";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment/moment";
 import { decode } from "html-entities";
-import { initialComment, initialPost } from "../../models";
+import { initialComment } from "../../models";
 import { userRequest } from "../../services/user/userRequest";
 import { commentRequest } from "../../services/comment/commentRequest";
 import { commentActions } from "../../services/comment/commentSlice";
@@ -46,7 +46,7 @@ const PostDetailPage = (props) => {
     tenGV: "",
   });
 
-  const { allCmtRender, allRepCommentId, allCmtAtCurrentPost } = useSelector(
+  const { allCmtRender, allRepCommentId } = useSelector(
     (state) => state.comment
   );
 
@@ -64,8 +64,8 @@ const PostDetailPage = (props) => {
       });
       setNumberLove(count);
     }
-    if(numberLove < 1) handle();
-  }, []);
+    handle();
+  }, [numberLove, postId]);
 
   // phần xử lý lấy thông tin bài viết
   useEffect(() => {
@@ -92,20 +92,18 @@ const PostDetailPage = (props) => {
         username: userPost.username,
         avatar: userPost.username.slice(0, 1),
       };
-      console.log("userPost: ", userPost);
       setCurrentPost(post);
-      console.log("postStore.current: ", postStore.current);
     }
     handle();
-  }, []);
+  }, [dispatch, postId, postStore]);
 
   useEffect(()=> {
       //lấy danh sách comment từ postId
       async function handle(){
         await commentRequest.getAllCommentByPostId(postId, dispatch);
       }
-      if(allCmtAtCurrentPost.length < 0) handle();
-  }, [])
+      handle();
+  }, [dispatch, postId])
   //cập nhật danh sách comment khi nhấn vào các comment đã rep
 
   // hiển thị các cmt rep cmt vừa chọn
@@ -128,7 +126,7 @@ const PostDetailPage = (props) => {
       let type = 2;
       if (favorite) type = 1;
       let dataUpdate = { ...checkFavorite.data, type };
-      let fav = await favoriteRequest.update(dataUpdate);
+      await favoriteRequest.update(dataUpdate);
 
       if (checkFavorite.data.type === 1) {
         if (type === 2) {
@@ -147,7 +145,7 @@ const PostDetailPage = (props) => {
         postId,
         type,
       };
-      let fav = await favoriteRequest.create(dataPost);
+      await favoriteRequest.create(dataPost);
       if (type === 1) {
         setNumberLove((pre) => pre + 1);
       }
@@ -249,7 +247,7 @@ const PostDetailPage = (props) => {
             )}
           </ListItem>
           {allCmtRender.map((comment, index) => {
-            if (comment.postId == postId)
+            if (comment.postId === postId)
               return (
                 <CommentItem
                   comment={comment}

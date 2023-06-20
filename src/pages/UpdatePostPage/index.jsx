@@ -21,16 +21,19 @@ const UpdatePostPage = (props) => {
     checkEditable = true;
   }
   // lấy dữ liệu bài viết
-  useEffect(async () => {
-     postRequest.getById(postId, dispatch);
+  useEffect(() => {
+    async function handle() {
+      await postRequest.getById(postId, dispatch);
 
-    var userPost = await userRequest.getById(postStore.current.userId);
-    var post = {
-      ...postStore.current,
-      username: userPost.username,
-    };
-    setCurrentPost(post);
-  }, []);
+      var userPost = await userRequest.getById(postStore.current.userId);
+      var post = {
+        ...postStore.current,
+        username: userPost.username,
+      };
+      setCurrentPost(post);
+    }
+    handle();
+  }, [dispatch, postId, postStore]);
   return (
       checkEditable ? <Grid
         container

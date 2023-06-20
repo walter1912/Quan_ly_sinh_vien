@@ -9,13 +9,13 @@ import {
 } from "@mui/material";
 import moment from "moment/moment";
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import { userRequest } from "../../services/user/userRequest";
 
 import ReplyComment from "./ReplyComment";
 
 const CommentItem = (props) => {
-  const { comment, handleViewRepCmt, allRepCommentId, currentUser } = props;
+  const { comment, handleViewRepCmt,  currentUser } = props;
 
   const dispatch = useDispatch();
   const [user, setUser] = useState({});
@@ -46,7 +46,7 @@ const CommentItem = (props) => {
       setUser(inforUser);
     };
     change();
-  }, [comment.id]);
+  }, [comment.userId, dispatch]);
 
   function handleViewCmt() {
     setViewMore(!viewMore);

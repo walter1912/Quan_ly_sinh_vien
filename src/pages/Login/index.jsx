@@ -3,9 +3,7 @@ import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
-import Button from "@mui/material/Button";
-import { Alert, IconButton, TextField } from "@mui/material";
-import { Delete } from "@mui/icons-material";
+import {  IconButton, TextField } from "@mui/material";
 import { styled as makeStyles } from "@mui/material";
 import * as yup from "yup";
 import { Form, Formik } from "formik";
@@ -63,7 +61,6 @@ const validationSchema = yup.object({
 function Login(props) {
   const dispatch = useDispatch();
   const [open, setOpen] = React.useState(true);
-  const handleOpen = () => setOpen(true);
   const handleClose = () => {
     setOpen(false);
     navigate(-1);

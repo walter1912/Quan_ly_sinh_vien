@@ -1,7 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { useParams } from "react-router-dom";
-import { Box, Container } from "@mui/material";
 import CRUDSinhVien from "../../components/CRUDSinhVien";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { useSelector } from "react-redux";

@@ -1,8 +1,7 @@
-import React from "react";
 import PropTypes from "prop-types";
 import { useState } from "react";
 import usePagination from "../custom-hook/usePagination";
-import { Box, List, Pagination } from "@mui/material";
+import { Box, Pagination } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 
 const CustomPagination = ({ data, per_page, component }) => {

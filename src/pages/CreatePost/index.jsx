@@ -1,5 +1,3 @@
-import React from "react";
-import PropTypes from "prop-types";
 import Editor from "./Editor";
 import Grid from "@mui/material/Unstable_Grid2";
 import { postRequest } from "../../services/post/postRequest";

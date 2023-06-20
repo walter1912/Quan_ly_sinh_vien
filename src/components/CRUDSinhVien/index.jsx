@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
+import  { useEffect, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { sinhvienRequest } from "../../services/sinhvien/sinhvienRequest";
@@ -7,8 +6,7 @@ import { khoaRequest } from "../../services/khoa/khoaRequest";
 
 import moment from "moment/moment";
 // dùng formik
-import { ErrorMessage, Formik, Form } from "formik";
-import * as Yup from "yup";
+import {  Formik } from "formik";
 import { initialSinhVien } from "../../models";
 import {
   ButtonGroup,
@@ -28,7 +26,6 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateField } from "@mui/x-date-pickers/DateField";
 import { useLocation } from "react-router-dom";
-import { StaticDateTimePicker } from "@mui/x-date-pickers";
 
 const CRUDSinhVien = (props) => {
   // dùng useContext để lấy sinhVien hiện tại (có thể được lấy khi mình nhấn nút chỉnh sửa ở Component ListSinhVien)
@@ -36,15 +33,16 @@ const CRUDSinhVien = (props) => {
 
   //dùng redux
   let giangVienStore = useSelector((state) => state.giangVien);
+  const dispatch = useDispatch();
+
   // lấy ra danh sách các khoa
   const khoas = useSelector((state) => state.khoa);
   useEffect(() => {
     async function handle() {
       await khoaRequest.getAll(dispatch);
-      console.log("Lấy danh sách khoa");
     }
     if (khoas.length < 1) handle();
-  }, []);
+  }, [dispatch, khoas.length]);
   const dataList = khoas.map((k) => ({ id: k.id, value: k.ten }));
 
 
@@ -61,7 +59,6 @@ const CRUDSinhVien = (props) => {
   const [ngaySinh, setNgaySinh] = useState(
     moment(storeSinhVien.current.ngaySinh) ?? moment()
   );
-  const dispatch = useDispatch();
   // sinhVien sẽ luôn được cập nhật nên là dùng useEffect để cập nhật các trường nhập sinh viên.
   useEffect(() => {
     function handle() {
@@ -69,7 +66,7 @@ const CRUDSinhVien = (props) => {
       setNgaySinh(moment());
     }
     if (isEditSinhVien === false) handle();
-  }, []);
+  }, [isEditSinhVien]);
 
   function checkForm(sinhVien) {
     let allFielded = true;

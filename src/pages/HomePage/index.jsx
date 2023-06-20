@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect } from "react";
 
 import { Box, Button, styled } from "@mui/material";
 import { banner } from "../../assets/assets";
@@ -20,8 +20,11 @@ const HomePage = (props) => {
   const { allPost } = useSelector((state) => state.post);
   const dispatch = useDispatch();
   useEffect(() => {
-    postRequest.getAll(dispatch);
-  }, []);
+   async function handle(){
+    await postRequest.getAll(dispatch);
+   }
+   handle();
+  }, [dispatch]);
   return (
     <Box component="a" sx={{ bgcolor: "#fafafa" }}>
       <Carousel>

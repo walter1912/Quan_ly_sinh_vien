@@ -1,8 +1,5 @@
-import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
+import  { useEffect } from "react";
 import { useLocation, useParams } from "react-router-dom";
-import { Box, Container } from "@mui/material";
-import Grid from "@mui/material/Unstable_Grid2";
 import { khoaRequest } from "../../services/khoa/khoaRequest";
 import ListSinhVien from "../../components/ListSinhVien";
 import ListGiangVien from "../../components/ListGiangVien";
@@ -32,7 +29,7 @@ const KhoaDetailPage = (props) => {
       }
     }
     handle();
-  }, [khoaId]);
+  }, [khoaId, viewGiangVien, viewSinhVien, dispatch]);
 
   return (
     <Grid2 container spacing={4} sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>

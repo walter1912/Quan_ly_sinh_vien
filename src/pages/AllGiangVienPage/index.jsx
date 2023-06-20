@@ -1,5 +1,3 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { giangvienRequest } from '../../services/giangvien/giangvienRequest';
 import { giangvienActions } from '../../services/giangvien/giangvienSlice';
@@ -13,7 +11,7 @@ const AllGiangVienPage = props => {
   const storeGiangVien = useSelector((state) => state.giangVien);
   useEffect(() => {
     giangvienRequest.getAll(dispatch);
-  }, [storeGiangVien.currentRender]);
+  }, [storeGiangVien.currentRender, dispatch]);
 
   return (
     <Container>

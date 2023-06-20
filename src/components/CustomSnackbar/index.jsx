@@ -10,7 +10,7 @@ const Alert = forwardRef(function Alert(props, ref) {
 });
 
 const CustomSnackbar = (props) => {
-  const { handleClick, messageAlert, severity, txtBtn, iconBtn , variant, children} = props;
+  const { handleClick, messageAlert, severity, txtBtn,  variant, children} = props;
   const [open, setOpen] = useState(false);
 
   return (

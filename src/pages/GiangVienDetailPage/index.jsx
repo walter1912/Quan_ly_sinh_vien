@@ -1,5 +1,3 @@
-import React from "react";
-import PropTypes from "prop-types";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -47,7 +45,7 @@ const GiangVienDetailPage = (props) => {
       }
     }
     handle();
-  }, []);
+  }, [viewPosts,viewSinhViens, dispatch, giangVienId, giangVienStore]);
 
   console.log("list post: ", listPost);
   return (

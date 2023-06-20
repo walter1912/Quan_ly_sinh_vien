@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Alert, Button, IconButton, List, Menu, MenuItem } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -84,11 +83,10 @@ const UserPage = (props) => {
       }
       if (response) {
         setCurrentUser(user.current);
-        console.log("currentUser useEffect: ", currentUser);
       }
     };
     fetchUserInformation();
-  }, []);
+  }, [dispatch, user]);
 
   // hàm cập nhật thông tin currentUser
   async function handleUpdateUser() {
@@ -159,7 +157,7 @@ const UserPage = (props) => {
           <Alert severity="warning"> {checkInforUser.mes}</Alert>
           <Button variant="contained">
             <Link
-              state={{ isEditGiangVien: false, isEditGiangVien: false , ma: currentUser.username }}
+              state={{ isEditGiangVien: false, isEditSinhVien: false , ma: currentUser.username }}
               to={`${
                 checkInforUser.ma === "GV"
                   ? "/giangviens/create"

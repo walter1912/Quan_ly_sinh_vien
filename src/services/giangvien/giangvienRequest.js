@@ -1,9 +1,8 @@
 import { initialGiangVien } from "../../models";
 import axiosInstance from "../../utils/axiosInstance";
-import { userRequest } from "../user/userRequest";
 import { giangvienActions } from "./giangvienSlice";
 
-const { updateList, changeCurrent, deleteOne, search, add, editOne } =
+const { updateList, changeCurrent, deleteOne, add, editOne } =
   giangvienActions;
 
 export const giangvienRequest = {

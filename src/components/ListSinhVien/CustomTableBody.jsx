@@ -1,8 +1,5 @@
-import React, { useEffect } from "react";
-import PropTypes from "prop-types";
 import { TableBody } from "@mui/material";
 import SinhVien from "./SinhVien";
-import { useDispatch, useSelector } from "react-redux";
 
 var rows = [];
 const CustomTableBody = ({ page, rowsPerPage, listSinhVien }) => {

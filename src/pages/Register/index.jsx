@@ -3,7 +3,6 @@ import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
-import Button from "@mui/material/Button";
 import {
   FormControl,
   IconButton,
@@ -15,7 +14,7 @@ import {
 import { styled } from "@mui/material";
 import * as yup from "yup";
 import { Form, Formik } from "formik";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { userRequest } from "../../services/user/userRequest";
 import { useState } from "react";
 import CustomSnackbar from "../../components/CustomSnackbar";

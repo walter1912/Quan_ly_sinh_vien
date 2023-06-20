@@ -1,5 +1,3 @@
-import React from "react";
-import PropTypes from "prop-types";
 import SideBar from "../SideBar";
 import { Outlet } from "react-router-dom";
 import { Box, Container, CssBaseline } from "@mui/material";

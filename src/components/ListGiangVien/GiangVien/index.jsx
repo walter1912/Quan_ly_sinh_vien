@@ -1,12 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 
 import { IconButton, TableCell, TableRow, Tooltip } from "@mui/material";
-import { Article, Delete, Edit, Group, Groups } from "@mui/icons-material";
+import { Article, Groups } from "@mui/icons-material";
 import moment from "moment";
-import { giangvienActions } from "../../../services/giangvien/giangvienSlice";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const GiangVien = (props) => {
   let giangvien = props.giangvien;

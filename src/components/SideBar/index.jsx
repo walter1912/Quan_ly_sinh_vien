@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
@@ -10,11 +9,9 @@ import List from "@mui/material/List";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import ItemMenu from "./ItemMenu";
 
 import { navItems } from "./navItems";
-import { Container } from "@mui/material";
 import { img } from "../../assets/assets";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
@@ -36,8 +33,7 @@ function SideBar(props) {
         pre => ({...pre, name:user.current.username})
       )
     }
-    console.log("userItem: ", userItem);
-  }, [])
+  }, [user])
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
 
