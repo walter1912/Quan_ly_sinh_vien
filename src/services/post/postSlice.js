@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { initialPost } from "../../models";
+import { initialPost } from "../../models.ts";
 import { getLocalStorage, setLocalStorage } from "../../utils/localStorage";
 import moment from "moment/moment";
 

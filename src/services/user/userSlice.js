@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { initialUser } from "../../models";
+import { initialUser } from "../../models.ts";
 import {
   getLocalStorage,
   removeLocalStorage,

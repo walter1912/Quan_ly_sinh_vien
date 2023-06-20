@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getLocalStorage, setLocalStorage } from "../../utils/localStorage";
-import { initialKhoa } from "../../models";
+import { initialKhoa } from "../../models.ts";
 
 const initial = getLocalStorage("allKhoa")??[initialKhoa];
 const khoaSlice = createSlice({

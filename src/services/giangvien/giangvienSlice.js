@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { initialGiangVien } from "../../models";
+import { initialGiangVien } from "../../models.ts";
 import { getLocalStorage, setLocalStorage } from "../../utils/localStorage";
 
 const initGiangVien = {
