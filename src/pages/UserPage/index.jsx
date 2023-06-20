@@ -56,7 +56,7 @@ const UserPage = (props) => {
   });
   useEffect(() => {
     const fetchUserInformation = async () => {
-      setOneGet(false);
+     
       const response = await userRequest.getInfor(user.current, dispatch, true);
       // kiểm tra xem đã có giangvien hoặc sinhvien có mã = user.current.username chưa
       if (response.status === 404) {
@@ -86,7 +86,7 @@ const UserPage = (props) => {
         setCurrentUser(user.current);
       }
     };
-    if(oneGet) fetchUserInformation();
+    fetchUserInformation();
   }, []);
 
   // hàm cập nhật thông tin currentUser
