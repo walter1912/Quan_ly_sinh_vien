@@ -18,7 +18,7 @@ const FormPassword = (props) => {
     const [newPassword, setNewPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [errNewPassword, setErrNewPassword] = useState(true);
-  
+    console.log(errNewPassword);
     return (
       <EditPassword spacing={3}>
         <TextField

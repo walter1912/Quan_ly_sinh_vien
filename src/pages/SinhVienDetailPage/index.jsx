@@ -20,7 +20,7 @@ const SinhVienDetailPage = (props) => {
   if (
     userStore.current.username === sinhVienStore.current.maSV &&
     sinhVienId !== undefined &&
-    sinhVienId == sinhVienStore.current.id
+    sinhVienId === sinhVienStore.current.id
   ) {
     isEdit = true;
   }
