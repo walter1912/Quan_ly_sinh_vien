@@ -54,7 +54,6 @@ const UserPage = (props) => {
     info: {},
     mes: "chưa tạo",
   });
-  const [oneGet, setOneGet] = useState(true);
   useEffect(() => {
     const fetchUserInformation = async () => {
       setOneGet(false);
@@ -88,7 +87,7 @@ const UserPage = (props) => {
       }
     };
     if(oneGet) fetchUserInformation();
-  }, [dispatch, user, oneGet]);
+  }, []);
 
   // hàm cập nhật thông tin currentUser
   async function handleUpdateUser() {
