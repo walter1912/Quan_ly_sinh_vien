@@ -86,7 +86,7 @@ const UserPage = (props) => {
       }
     };
     fetchUserInformation();
-  }, [dispatch, user]);
+  }, []);
 
   // hàm cập nhật thông tin currentUser
   async function handleUpdateUser() {
