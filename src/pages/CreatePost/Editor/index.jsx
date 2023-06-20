@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import ReactQuill from "react-quill";
-// import 'react-quill/dist/quill.snow.css';
+import 'react-quill/dist/quill.snow.css';
 import { useState } from "react";
 import { formats, modules } from "./props";
 import TextareaAutosize from "@mui/base/TextareaAutosize";
