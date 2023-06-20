@@ -54,8 +54,10 @@ const UserPage = (props) => {
     info: {},
     mes: "chưa tạo",
   });
+  const [oneGet, setOneGet] = useEffect(true);
   useEffect(() => {
     const fetchUserInformation = async () => {
+      setOneGet(false);
       const response = await userRequest.getInfor(user.current, dispatch, true);
       // kiểm tra xem đã có giangvien hoặc sinhvien có mã = user.current.username chưa
       if (response.status === 404) {
@@ -85,8 +87,8 @@ const UserPage = (props) => {
         setCurrentUser(user.current);
       }
     };
-    fetchUserInformation();
-  }, []);
+    if(oneGet) fetchUserInformation();
+  }, [dispatch, user, oneGet]);
 
   // hàm cập nhật thông tin currentUser
   async function handleUpdateUser() {
