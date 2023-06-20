@@ -65,7 +65,7 @@ const ImgDes = styled("div")((props) => ({
           </Overlay>
         </ImgDes>
         <Link to={`/posts/${data.id}`} className="text-hover">
-          <h6 className="text-center">{data.title}</h6>
+          <span className="text-center">{data.title}</span>
         </Link>
      </Grid>
     );
