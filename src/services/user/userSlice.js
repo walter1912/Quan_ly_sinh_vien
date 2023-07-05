@@ -5,10 +5,11 @@ import {
   removeLocalStorage,
   setLocalStorage,
 } from "../../utils/localStorage";
+import { currentUser } from "../data.js";
 
 const initUser = {
   allUser: getLocalStorage("allUser") ?? [],
-  current: getLocalStorage("currentUser") ?? initialUser,
+  current: getLocalStorage("currentUser") ?? currentUser,
   login: getLocalStorage("userLogin") ?? false,
 };
 

@@ -2,11 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 import { initialPost } from "../../models.ts";
 import { getLocalStorage, setLocalStorage } from "../../utils/localStorage";
 import moment from "moment/moment";
+import { allPost, currentPost } from "../data.js";
 
 const initPost = {
-  allPost: getLocalStorage("allPost") ?? [],
+  allPost: getLocalStorage("allPost") ?? allPost,
   currentRender: [],
-  current: getLocalStorage("currentPost") ?? initialPost,
+  current: getLocalStorage("currentPost") ?? currentPost,
 };
 
 export const postSlice = createSlice({

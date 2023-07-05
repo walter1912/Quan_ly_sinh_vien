@@ -3,12 +3,13 @@ import {
   getLocalStorage,
   setLocalStorage,
 } from "../../utils/localStorage";
+import { allCmtAtCurrentPost } from "../data";
 
 // ở đây không cần lưu thông tin cmt đang thêm, phần đó để trong commentRequest
 const initComment = {
   // lấy ra tất cả các comment của bài viết nhưng chưa render hết
   // chỉ mặc định hiển thị các comment có repComment = 0
-  allCmtAtCurrentPost: getLocalStorage("allCmtAtCurrentPost") ?? [],
+  allCmtAtCurrentPost: getLocalStorage("allCmtAtCurrentPost") ?? allCmtAtCurrentPost,
   // danh sách những comment được rep và được hiển thị trong bài viết
   allRepCommentId: getLocalStorage("allRepCommentId") ?? [],
   // mặc định repCommentId = 0 được thêm vào allCmtRender để đc hiển thị

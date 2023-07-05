@@ -95,7 +95,7 @@ const PostDetailPage = (props) => {
       setCurrentPost(post);
     }
     handle();
-  }, [dispatch, postId, postStore]);
+  }, [postId, postStore]);
 
   useEffect(()=> {
       //lấy danh sách comment từ postId
@@ -103,7 +103,7 @@ const PostDetailPage = (props) => {
         await commentRequest.getAllCommentByPostId(postId, dispatch);
       }
       handle();
-  }, [dispatch, postId])
+  }, [postId])
   //cập nhật danh sách comment khi nhấn vào các comment đã rep
 
   // hiển thị các cmt rep cmt vừa chọn

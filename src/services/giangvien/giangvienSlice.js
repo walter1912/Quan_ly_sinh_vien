@@ -1,9 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { initialGiangVien } from "../../models.ts";
 import { getLocalStorage, setLocalStorage } from "../../utils/localStorage";
+import { allGiangVien } from "../data.js";
 
 const initGiangVien = {
-  allGiangVien: getLocalStorage("allGiangVien") ?? [],
+  allGiangVien: getLocalStorage("allGiangVien") ?? allGiangVien,
   currentRender: [],
   current: getLocalStorage("currentGiangVien") ?? initialGiangVien,
 };

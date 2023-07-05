@@ -23,7 +23,7 @@ const KhoaPage = (props) => {
       await khoaRequest.getAll(dispatch);
     }
     handle();
-  }, [khoa.length, dispatch]);
+  }, [khoa.length]);
   return (
     <Grid container style={{display:'flex',  flexDirection: "column", alignItems:"center"}}>
       <Grid xs={8}>

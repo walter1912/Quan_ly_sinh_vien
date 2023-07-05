@@ -116,6 +116,7 @@ const UserPage = (props) => {
         setMessageAlert("Chỉnh sửa giảng viên thành công!");
 
         dispatch(userActions.changeCurrent(currentUser));
+        setIsEdit(false);
       }
     }
     //cập nhật nếu là sinh viên
@@ -142,6 +143,7 @@ const UserPage = (props) => {
         setMessageAlert("Chỉnh sửa sinh viên thành công!");
 
         dispatch(userActions.changeCurrent(currentUser));
+        setIsEdit(false);
       }
     }
   }
