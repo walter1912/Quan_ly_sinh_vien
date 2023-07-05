@@ -1,10 +1,10 @@
 import { getLocalStorage, setLocalStorage } from "../../utils/localStorage";
 import { createSlice } from "@reduxjs/toolkit";
 import { initialSinhVien } from "../../models.ts";
-import { currentSinhVien } from "../data";
+import { allSinhVien, currentSinhVien } from "../data";
 
 const initSinhVien = {
-  allSinhVien: getLocalStorage("allSinhVien") ?? [],
+  allSinhVien: getLocalStorage("allSinhVien") ?? allSinhVien ,
   currentRender: [],
   current: getLocalStorage("currentSinhVien") ?? currentSinhVien,
   nextId: getLocalStorage("nextId") ?? 0,
