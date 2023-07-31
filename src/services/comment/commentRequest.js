@@ -9,6 +9,7 @@ export const commentRequest = {
       let createAt = new Date().toISOString();
       //data = {postId, userId, repCommentId, content }
       let dataPost = { ...data, createAt };
+      console.log("datapost comment:", dataPost);
       const res = await axiosInstance.post(url, dataPost);
       console.log("Kết quả khi thêm bình luận: ", res.data);
       dispatch(add(res.data));
@@ -20,12 +21,12 @@ export const commentRequest = {
   },
   getAllCommentByPostId: async function (postId, dispatch) {
     try {
-      let url = `/Comments/posts/${postId}`;
+      let url = `/Comments/post/${postId}`;
       const res = await axiosInstance.get(url);
       console.log("Kết quả khi lấy danh sách bình luận của bài viết =", res.data);
-      dispatch(updateAllCmt(res.data.comment));
+      dispatch(updateAllCmt(res.data.comments));
 
-      const renderCmt = res.data.comment.filter(
+      const renderCmt = res.data.comments.filter(
         (cmt) => cmt.repCommentId === 0
       );
       dispatch(updateRenderCmt(renderCmt));

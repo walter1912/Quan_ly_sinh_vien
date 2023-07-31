@@ -14,29 +14,32 @@ import styled from "@emotion/styled";
 import Grid from "@mui/material/Unstable_Grid2";
 import { Groups, PeopleOutline } from "@mui/icons-material";
 import { HrHeader } from "../../components/HrHeader";
+import { actions } from "../../services/response/responseSlice";
 
 const KhoaPage = (props) => {
   let khoa = useSelector((state) => state.khoa);
   const dispatch = useDispatch();
   useEffect(() => {
     async function handle() {
-      await khoaRequest.getAll(dispatch);
+      const res = await khoaRequest.getAll(dispatch);
+      dispatch(actions.otherMethods(res));
     }
     handle();
-  }, [khoa.length]);
+  }, []);
   return (
-    <Grid container style={{display:'flex',  flexDirection: "column", alignItems:"center"}}>
+    <Grid
+      container
+      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+    >
       <Grid xs={8}>
-        <HrHeader style={{width:"400px"}}>
-        <span>DANH SÁCH CÁC KHOA</span>
+        <HrHeader style={{ width: "400px" }}>
+          <span>DANH SÁCH CÁC KHOA</span>
         </HrHeader>
-        <List
-         style={{width: "100%"}}
-        >
+        <List style={{ width: "100%" }}>
           {khoa.map((k, index) => (
             <>
-            <KhoaItem khoa={k} key={index} />
-            <Divider />
+              <KhoaItem khoa={k} key={index} />
+              <Divider />
             </>
           ))}
         </List>

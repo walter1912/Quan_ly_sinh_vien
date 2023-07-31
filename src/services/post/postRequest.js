@@ -8,34 +8,28 @@ export const postRequest = {
   create: async function (data, dispatch) {
     try {
       let url = `/Posts`;
-      let createAt = new Date().toISOString();
-      let updateAt = new Date().toISOString();
-      const { userId, title, content, thumbnail } = data;
-
-      const dataPost = {
-        userId,
-        createAt,
-        updateAt,
-        title,
-        content,
-        thumbnail,
-      };
-
-      const res = await axiosInstance.post(url, dataPost);
+      const res = await axiosInstance.post(url, data);
       console.log("Kết quả khi thêm bài viết: ", res.data);
-      dispatch(add(res.data));
-      return { status: 200 };
+      if(res.status === 201) {
+
+        dispatch(add(res.data.post));
+      }
+     return res;
     } catch (err) {
       console.log("Lỗi khi thêm post: ", err);
-      return { err: err, status: 400 };
+      return err;
     }
   },
   getAll: async function (dispatch) {
     try {
       let url = `/Posts`;
       const res = await axiosInstance.get(url);
-      dispatch(updateList(res.data));
       console.log("kết quả trả về khi lấy danh sách post: ", res.data);
+      if(res.status === 200) {
+
+        dispatch(updateList(res.data.posts));
+      }
+      return res;
     } catch (err) {
       console.log("Lỗi khi get danh sách post: ");
     }
@@ -49,7 +43,7 @@ export const postRequest = {
         id,
         res.data
       );
-      return res.data;
+      return res;
     } catch (err) {
       console.log("Lỗi khi lấy danh sách bài viết được đăng bởi userId =", id);
       return err;
@@ -59,11 +53,14 @@ export const postRequest = {
     try {
       let url = `/Posts/${id}`;
       const res = await axiosInstance.get(url);
-      dispatch(changeCurrent(res.data));
+      if(res.status === 200) {
+        dispatch(changeCurrent(res.data.post));
+      }
       console.log("Kết quả trả về khi lấy bài đăng theo id = ", id, res.data);
-      return res.data;
+      return res;
     } catch (err) {
       console.log("Lỗi khi lấy ra post theo id:", id, err);
+      return err;
     }
   },
   delete: async function (id, dispatch) {
@@ -76,13 +73,18 @@ export const postRequest = {
       }
 
       if (isDelete) {
-        dispatch(deleteOne(id));
         let url = `/Posts/${id}`;
         const res = await axiosInstance.delete(url);
+        if(res.status === 200) {
+          dispatch(deleteOne(id));
+        }
         console.log("Kết quả trả về khi xóa bài đăng: ", res);
+        return res;
       }
+      return {};
     } catch (err) {
       console.log(`Lỗi khi xóa bài đăng có id=${id} : `, err);
+      return err;
     }
   },
   update: async function (data, dispatch) {
@@ -98,26 +100,16 @@ export const postRequest = {
 
       if (isEdit) {
         let url = `/Posts/${data.id}`;
-
-        let updateAt = new Date().toISOString();
-        const { id, userId, title, createAt, content, thumbnail } = data;
-        const dataPut = {
-          id,
-          userId,
-          createAt,
-          updateAt,
-          title,
-          content,
-          thumbnail,
-        };
-        const res = await axiosInstance.put(url, dataPut);
+        const res = await axiosInstance.put(url, data);
         console.log("Kết quả trả về khi cập nhật bài đăng: ", res);
-        dispatch(changeCurrent(res.data));
-        dispatch(editOne(data));
+        if(res.status === 200) {
+          dispatch(changeCurrent(res.data.post));
+          dispatch(editOne(res.data.post));
+
+        }
         return res;
       }
-      let res = { status: 400 };
-      return res;
+      return {};
     } catch (err) {
       console.log(`Lỗi khi cập nhập bài đăng có id=${data.id} : `, err);
       return err;

@@ -4,13 +4,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import PostItem from "../../components/PostItem";
 import { postRequest } from "../../services/post/postRequest";
+import { actions } from "../../services/response/responseSlice";
 
 const AllPostPage = (props) => {
   const { allPost } = useSelector((state) => state.post);
   const dispatch = useDispatch();
   useEffect(() => {
     async function handle() {
-      await postRequest.getAll(dispatch);
+      const res = await postRequest.getAll(dispatch);
+      dispatch(actions.otherMethods(res));
     }
     handle();
   }, [dispatch]);

@@ -1,5 +1,5 @@
 const columns = [
-  { id: "id", label: "Id", minWidth: 20, align: "center" },
+  // { id: "id", label: "Id", minWidth: 20, align: "center" },
   { id: "maGV", label: "Mã giảng viên", minWidth: 100, align: "center" },
   { id: "tenGV", label: "Tên giảng viên", minWidth: 170, align: "center" },
   {

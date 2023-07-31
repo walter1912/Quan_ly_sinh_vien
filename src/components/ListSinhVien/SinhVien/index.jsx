@@ -43,7 +43,7 @@ const SinhVien = (props) => {
           value={id}
         />
       </TableCell>
-      <TableCell align="center">{id}</TableCell>
+      {/* <TableCell align="center">{id}</TableCell> */}
       <TableCell align="center">{maSV} </TableCell>
       <TableCell align="center">{tenSV} </TableCell>
       <TableCell align="center">

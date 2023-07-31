@@ -14,7 +14,7 @@ const GiangVien = (props) => {
 
   return (
     <TableRow hover>
-      <TableCell align="center">{id}</TableCell>
+      {/* <TableCell align="center">{id}</TableCell> */}
       <TableCell align="center">{maGV} </TableCell>
       <TableCell align="center">{tenGV} </TableCell>
       <TableCell align="center">

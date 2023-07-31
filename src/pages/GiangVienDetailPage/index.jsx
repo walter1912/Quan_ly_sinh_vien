@@ -8,6 +8,7 @@ import PostItem from "../../components/PostItem";
 import { HrHeader } from "../../components/HrHeader";
 import { updateCurrentRender } from "../../services/sinhvien/sinhvienSlice";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
+import { actions } from "../../services/response/responseSlice";
 
 const GiangVienDetailPage = (props) => {
   const { giangVienId } = useParams();
@@ -26,22 +27,24 @@ const GiangVienDetailPage = (props) => {
   const dispatch = useDispatch();
   useEffect(() => {
     async function handle() {
-      await giangvienRequest.getById(giangVienId, dispatch);
+      const resGV = await giangvienRequest.getById(giangVienId, dispatch);
+      dispatch(actions.otherMethods(resGV));
       // xử lý khi muốn xem danh sách sinh viên đã tạo
 
       if (viewSinhViens) {
-        let listSV = await giangvienRequest.getAllSinhVienById(
+        const resSV = await giangvienRequest.getAllSinhVienById(
           giangVienStore.current.id
         );
-
-        dispatch(updateCurrentRender(listSV.sinhVien));
+        dispatch(updateCurrentRender(resSV.data.sinhviens));
+        dispatch(actions.otherMethods(resSV));
       }
       // xử lý khi muốn xem bài đăng
       if (viewPosts) {
-        var listP = await giangvienRequest.getAllPostByMaGV(
+        const resP = await giangvienRequest.getAllPostByMaGV(
           giangVienStore.current.maGV
         );
-        setListPost(listP.post);
+        setListPost(resP.data.posts);
+        dispatch(actions.otherMethods(resP));
       }
     }
     handle();

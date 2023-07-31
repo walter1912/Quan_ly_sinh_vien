@@ -3,7 +3,7 @@ import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
-import {  IconButton, TextField } from "@mui/material";
+import { IconButton, TextField } from "@mui/material";
 import { styled as makeStyles } from "@mui/material";
 import * as yup from "yup";
 import { Form, Formik } from "formik";
@@ -54,8 +54,8 @@ const validationSchema = yup.object({
     .required("Yêu cầu nhập username"),
   password: yup
     .string("Nhập password của ban")
-    .min(8, "Password tối thiểu 8 chữ số")
     .required("Yêu cầu nhập password"),
+  // .min(8, "Password tối thiểu 6 chữ số")
 });
 
 function Login(props) {
@@ -70,14 +70,16 @@ function Login(props) {
   const [severity, setSeverity] = useState("success");
   const [messageAlert, setMessageAlert] = useState("đăng nhập");
   async function handleCheckLogin(values) {
-    alert(JSON.stringify(values, null, 2));
     const res = await userRequest.checkLogin(values, dispatch);
+      
+    setMessageAlert(res.data.message);
     if (res.status === 200) {
-      setMessageAlert("Đăng nhập thành công");
-      navigate("/");
+      setSeverity("success");
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
     } else {
       setSeverity("error");
-      setMessageAlert(res.data);
     }
   }
   return (
@@ -101,8 +103,8 @@ function Login(props) {
 
             <Formik
               initialValues={{
-                username: "username",
-                password: "password",
+                username: "",
+                password: "",
               }}
               validationSchema={validationSchema}
               onSubmit={(values) => {

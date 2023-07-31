@@ -7,6 +7,7 @@ import { Provider } from "react-redux";
 import { store } from "./app/store";
 import Loading from "./components/Loading";
 import { BrowserRouter } from "react-router-dom";
+import CustomToastify from "./components/CustomToastify";
 
 
 
@@ -18,6 +19,7 @@ root.render(
     <BrowserRouter>
       <React.Suspense fallback={<Loading />}>
           <App />
+          <CustomToastify />
       </React.Suspense>
     </BrowserRouter>
   </Provider>

@@ -19,6 +19,7 @@ import { userRequest } from "../../services/user/userRequest";
 import { useState } from "react";
 import CustomSnackbar from "../../components/CustomSnackbar";
 import { useDispatch } from "react-redux";
+import { actions } from "../../services/response/responseSlice";
 
 const STForm = styled(Form)(({ theme }) => ({
   height: "auto",
@@ -82,10 +83,17 @@ function Register(props) {
       password,
       role,
     };
+    console.log("entered register");
     let res = await userRequest.register(data, dispatch);
-    setMessageAlert(res.mes);
-    if (res.status === 404) {
+    dispatch(actions.postMethod(res));
+    setMessageAlert(res.data.message);
+    if (res.status !== 201) {
       setSeverity("error");
+    } else {
+      setSeverity("success");
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
     }
   }
   return (

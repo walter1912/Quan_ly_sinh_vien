@@ -1,16 +1,21 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { giangvienRequest } from '../../services/giangvien/giangvienRequest';
-import { giangvienActions } from '../../services/giangvien/giangvienSlice';
-import ListGiangVien from '../../components/ListGiangVien';
-import SearchItem from '../../components/SearchItem';
-import { Container } from '@mui/material';
-import { useEffect } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { giangvienRequest } from "../../services/giangvien/giangvienRequest";
+import { giangvienActions } from "../../services/giangvien/giangvienSlice";
+import ListGiangVien from "../../components/ListGiangVien";
+import SearchItem from "../../components/SearchItem";
+import { Container } from "@mui/material";
+import { useEffect } from "react";
+import { actions } from "../../services/response/responseSlice";
 
-const AllGiangVienPage = props => {
-    const dispatch = useDispatch();
+const AllGiangVienPage = (props) => {
+  const dispatch = useDispatch();
   const storeGiangVien = useSelector((state) => state.giangVien);
   useEffect(() => {
-    giangvienRequest.getAll(dispatch);
+    async function handle() {
+      const res = await giangvienRequest.getAll(dispatch);
+      dispatch(actions.otherMethods(res));
+    }
+    handle();
   }, [storeGiangVien.currentRender, dispatch]);
 
   return (
@@ -21,8 +26,6 @@ const AllGiangVienPage = props => {
   );
 };
 
-AllGiangVienPage.propTypes = {
-    
-};
+AllGiangVienPage.propTypes = {};
 
 export default AllGiangVienPage;

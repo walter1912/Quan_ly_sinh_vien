@@ -95,7 +95,7 @@ const PostDetailPage = (props) => {
       setCurrentPost(post);
     }
     handle();
-  }, [postId, postStore]);
+  }, []);
 
   useEffect(()=> {
       //lấy danh sách comment từ postId

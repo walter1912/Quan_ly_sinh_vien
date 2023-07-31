@@ -19,6 +19,7 @@ function ReplyComment(props) {
         userId: currentUser.id,
         level: comment.level + 1,
       };
+     
       const res = await commentRequest.create(data, dispatch);
 
       if (res.status === 200) setMessageAlert(`Bạn vừa gửi câu trả lời cho ${user.ten}`);

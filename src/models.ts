@@ -1,32 +1,32 @@
 export interface SinhVienDTO {
-  id: number;
+  id: string;
   tenSV: string;
   maSV: string;
   ngaySinh: any;
   gioiTinh: string;
-  khoaId: number;
+  khoaId: string;
   isEdit: boolean;
   tenKhoa: string;
 
   //
-  giangVienId: number;
+  userId: string;
 }
 export interface GiangVienDTO {
-  id: number;
+  id: string;
   tenGV: string;
   maGV: string;
   ngaySinh: any;
   gioiTinh: string;
-  khoaId: number;
+  khoaId: string;
   isEdit: boolean;
   email: string;
 }
 export interface KhoaDTO {
-  id: number;
+  id: string;
   ten: string;
 }
 export interface UserDTO {
-  id: number;
+  id: string;
   username: string;
   password: string;
   role: number;
@@ -34,13 +34,13 @@ export interface UserDTO {
   ma: string;
   ngaySinh: any;
   gioiTinh: string;
-  khoaId: number;
+  khoaId: string;
   email: string;
   // 1 với giảng viên, 2 với sinh viên
 }
 export interface PostDTO {
-  id: number;
-  userId: number;
+  id: string;
+  userId: string;
   title: string;
   createAt: any;
   updateAt: any;
@@ -48,12 +48,12 @@ export interface PostDTO {
 }
 
 export interface CommentDTO {
-  id: number; //PK auto từ id = 1
-  postId: number; //FK from post
-  userId: number; //FK from user
+  id: string; //PK auto từ id = 1
+  postId: string; //FK from post
+  userId: string; //FK from user
   //id của comment mà mình rep, trường hợp bình luận đầu tiên thì id = 0
   // để tránh trường hợp nhầm là rep comment khác.
-  repCommentId: number;
+  repCommentId: string;
   // nội dung comment chỉ dùng text;
   //dùng textArea
   content: string;
@@ -63,9 +63,9 @@ export interface CommentDTO {
   level: number;
 }
 export interface FavoriteDTO {
-  id: number;
-  postId: number;
-  userId: number;
+  id: string;
+  postId: string;
+  userId: string;
   createAt: any;
   updateAt: any;
   type: number;
@@ -73,71 +73,71 @@ export interface FavoriteDTO {
   //2 là unlike
 }
 export const initialSinhVien: SinhVienDTO = {
-  id: 0,
+  ngaySinh: new Date().toISOString(),
+  id: "",
   tenSV: "",
   maSV: "",
-  ngaySinh: new Date().toISOString(),
-  gioiTinh: '',
-  khoaId: 1,
+  gioiTinh: "",
+  khoaId: "",
   isEdit: false,
   tenKhoa: "",
-  giangVienId: 0,
+  userId: ""
 };
 
 export const initialGiangVien: GiangVienDTO = {
-  id: 0,
+  ngaySinh: new Date().toISOString(),
+  id: "",
   tenGV: "",
   maGV: "",
-  ngaySinh: new Date().toISOString(),
-  gioiTinh: '',
-  khoaId: 1,
+  gioiTinh: "",
+  khoaId: "",
   isEdit: false,
-  email: "",
+  email: ""
 };
 
 export const initialKhoa: KhoaDTO = {
-  id: 1,
   ten: "",
+  id: ""
 };
 export const initialUser: UserDTO = {
-  id: 1,
+  id: "",
   username: "",
   password: "",
-  role: 2,
+  role: 0,
   ten: "",
   ma: "",
-  ngaySinh: undefined,
+  ngaySinh: new Date().toISOString(),
   gioiTinh: "",
-  khoaId: 0,
-  email: "",
+  khoaId: "",
+  email: ""
 };
 
 export const initialPost: PostDTO = {
-  id: 0,
-  userId: 0,
+  id: "",
+  userId: "",
   title: "",
   createAt: new Date().toISOString(),
   updateAt: new Date().toISOString(),
-  thumbnail: "",
+  thumbnail: ""
 };
 
 export const initialComment: CommentDTO = {
-  id: 0,
-  postId: 0,
-  userId: 0,
-  repCommentId: 0,
+  id: "",
+  postId: "",
+  userId: "",
+  repCommentId: "",
   content: "",
   createAt: new Date().toISOString(),
-  level: 0,
+  level: 0
 };
 
 export const initialFavorite: FavoriteDTO = {
-  id: 0,
-  postId: 0,
-  userId: 0,
+  id: "",
+  postId: "",
+  userId: "",
   createAt: new Date().toISOString(),
   updateAt: new Date().toISOString(),
-  type: 1,
+  type: 0
 };
 
 

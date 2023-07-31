@@ -5,6 +5,8 @@ import userReducer from "../services/user/userSlice";
 import khoaReducer from "../services/khoa/khoaSlice";
 import postReducer from "../services/post/postSlice";
 import commentReducer from "../services/comment/commentSlice";
+import responseReducer from "../services/response/responseSlice";
+
 
 export const store = configureStore({
   reducer: {
@@ -14,5 +16,6 @@ export const store = configureStore({
     khoa: khoaReducer,
     post: postReducer,
     comment: commentReducer,
+    response: responseReducer,
   },
 });

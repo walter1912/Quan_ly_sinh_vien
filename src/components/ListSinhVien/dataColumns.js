@@ -1,6 +1,6 @@
 const columns = [
   { id: "checkbox", label: "", minWidth: 20, align: "center" },
-  { id: "id", label: "Id", minWidth: 20, align: "center" },
+  // { id: "id", label: "Id", minWidth: 20, align: "center" },
   { id: "maSV", label: "Mã sinh viên", minWidth: 100, align: "center" },
   { id: "tenSV", label: "Tên sinh viên", minWidth: 170, align: "center" },
   {
