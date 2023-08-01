@@ -24,7 +24,7 @@ const HomePage = (props) => {
     await postRequest.getAll(dispatch);
    }
    handle();
-  }, [dispatch]);
+  }, []);
   return (
     <Box component="a" sx={{ bgcolor: "#fafafa" }}>
       <Carousel>

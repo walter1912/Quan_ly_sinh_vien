@@ -65,7 +65,7 @@ export const commentSlice = createSlice({
     addRepCmtId(state, action) {
       const repCommentId = action.payload;
       var listRepCmt = state.allCmtAtCurrentPost.filter(
-        (cmt) => cmt.repCommentId === repCommentId
+        (cmt) => cmt.repCommentId == repCommentId
       );
       console.log(
         "state.allCmtAtCurrentPost filter and repCommentId: ",

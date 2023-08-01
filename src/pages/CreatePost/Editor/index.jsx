@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import ReactQuill from "react-quill";
-import 'react-quill/dist/quill.snow.css';
+import "react-quill/dist/quill.snow.css";
 import { useState } from "react";
 import { formats, modules } from "./props";
 import TextareaAutosize from "@mui/base/TextareaAutosize";
@@ -63,17 +63,11 @@ const Editor = (props) => {
       };
     }
     const res = await handleCRUDPost(data, dispatch);
+    setMessageAlert(res.data.message);
 
-    if (res.status === 400) {
+    if (res.status !== 201) {
       setSeverity("error");
-      setMessageAlert(res.err);
-    } else {
-      setMessageAlert(
-        `${user.current.username} ${
-          isUpdate ? "cập nhật" : "thêm"
-        } bài đăng thành công.`
-      );
-    }
+    } else setSeverity("success");
   }
   return (
     <div className="create-post">

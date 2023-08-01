@@ -25,10 +25,10 @@ export const userRequest = {
     try {
       let url = `/Users/${id}`;
       const res = await axiosInstance.get(url);
-      return  { status: res.status, data: res.data };
+      return { status: res.status, data: res.data };
     } catch (err) {
       console.log("Lỗi khi get user có id=", id, err);
-      return  { status: err.status, data: err.data };
+      return { status: err.status, data: err.data };
     }
   },
   getInfor: async function (data, dispatch, isChange) {
@@ -54,11 +54,12 @@ export const userRequest = {
               dispatch(changeCurrent(user));
               console.log("dispatch(changeCurrent(user)) giảng viên: ", user);
             }
+            res.data.user = res.data.giangvien;
           }
-          return  { status: res.status, data: res.data };
+          return { status: res.status, data: res.data };
         } catch (errGV) {
           console.log("Lấy thông tin giảng viên bị lỗi: ", errGV.data);
-          return  { status: errGV.status, data: errGV.data };
+          return { status: errGV.status, data: errGV.data };
         }
       } else {
         try {
@@ -81,16 +82,17 @@ export const userRequest = {
               dispatch(changeCurrent(user));
               console.log("dispatch(changeCurrent(user)) sinh viên: ", user);
             }
+            res.data.user = res.data.giangvien;
           }
-          return  { status: res.status, data: res.data };
+          return { status: res.status, data: res.data };
         } catch (errSV) {
           console.log("Lấy thông tin sinh viên bị lỗi: ", errSV.data);
-          return  { status: errSV.status, data: errSV.data };
+          return { status: errSV.status, data: errSV.data };
         }
       }
     } catch (err) {
       console.log("Lỗi khi lấy thông tin user: ", err);
-      return  { status: err.status, data: err.data };
+      return { status: err.status, data: err.data };
     }
   },
   checkLogin: async function (data, dispatch) {
@@ -102,10 +104,10 @@ export const userRequest = {
         dispatch(changeCurrent(res.data.user));
         setLocalStorage("accessToken", res.data.accessToken);
       }
-      return  { status: res.status, data: res.data };
+      return { status: res.status, data: res.data };
     } catch (err) {
       console.log("Lỗi khi đăng nhập: ", err);
-      return  { status: err.status, data: err.data };
+      return { status: err.status, data: err.data };
     }
   },
 };

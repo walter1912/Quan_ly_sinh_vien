@@ -32,6 +32,8 @@ import PopupState, { bindMenu, bindTrigger } from "material-ui-popup-state";
 import CommentItem from "./CommentItem";
 import ReplyComment from "./ReplyComment";
 import { favoriteRequest } from "../../services/favorite/favoriteRequest";
+import { actions } from "../../services/response/responseSlice";
+import { allCmtAtCurrentPost } from "../../services/data";
 
 const PostDetailPage = (props) => {
   let { postId } = useParams();
@@ -46,7 +48,7 @@ const PostDetailPage = (props) => {
     tenGV: "",
   });
 
-  const { allCmtRender, allRepCommentId } = useSelector(
+  const { allCmtRender, allRepCommentId, allCmtAtCurrentPost } = useSelector(
     (state) => state.comment
   );
 
@@ -58,11 +60,14 @@ const PostDetailPage = (props) => {
   useEffect(() => {
     async function handle() {
       let res = await favoriteRequest.getByPostId(postId);
-      let count = 0;
-      Array.from(res).forEach((fav) => {
-        if (fav.type === 1) count += 1;
-      });
-      setNumberLove(count);
+      dispatch(actions.otherMethods(res));
+      if (res.status === 200) {
+        let count = 0;
+        Array.from(res.data.favorites).forEach((fav) => {
+          if (fav.type === 1) count += 1;
+        });
+        setNumberLove(count);
+      }
     }
     handle();
   }, [numberLove, postId]);
@@ -72,38 +77,47 @@ const PostDetailPage = (props) => {
     // lấy thông tin post
 
     async function handle() {
-    
-      await postRequest.getById(postId, dispatch);
+      const resP = await postRequest.getById(postId, dispatch);
       // lấy username từ user
-      let userPost = await userRequest.getById(postStore.current.userId);
+      let resU = await userRequest.getById(postStore.current.userId);
       // lấy thông tin user (có check xem là giảng viên hay là sinh viên) từ username của user
       //get infor isEdit = false vì thông tin của user này không phải là thông tin user của người đăng nhập
-      let inforUser = await userRequest.getInfor(userPost, dispatch, false);
+      if (resU.status !== 200) {
+        dispatch(actions.otherMethods(resU));
+        return;
+      }
+      let resInfor = await userRequest.getInfor(
+        resU.data.user,
+        dispatch,
+        false
+      );
       // khi láy thông tin thì lấy từ table sinhVien hoặc là table giangVien nên cần xử lý lại
       // chỉ xử lý tự động khi isEdit = true
-      if (inforUser.tenGV === "") {
-        inforUser.ten = inforUser.tenSV;
+      const { user } = resInfor.data;
+      if (user.tenSV) {
+        user.ten = user.tenSV;
       } else {
-        inforUser.ten = inforUser.tenGV;
+        user.ten = user.tenGV;
       }
-      setUserPost(inforUser);
+      setUserPost(user);
       let post = {
         ...postStore.current,
-        username: userPost.username,
-        avatar: userPost.username.slice(0, 1),
+        username: resU.data.user.username,
+        avatar: resU.data.user.username.slice(0, 1),
       };
       setCurrentPost(post);
     }
     handle();
   }, []);
 
-  useEffect(()=> {
-      //lấy danh sách comment từ postId
-      async function handle(){
-        await commentRequest.getAllCommentByPostId(postId, dispatch);
-      }
-      handle();
-  }, [postId])
+  useEffect(() => {
+    //lấy danh sách comment từ postId
+    async function handle() {
+      const res = await commentRequest.getAllCommentByPostId(postId, dispatch);
+      dispatch(actions.otherMethods(res));
+    }
+    handle();
+  }, []);
   //cập nhật danh sách comment khi nhấn vào các comment đã rep
 
   // hiển thị các cmt rep cmt vừa chọn
@@ -123,12 +137,13 @@ const PostDetailPage = (props) => {
     );
     // xử lý khi đã tương tác trước đó
     if (checkFavorite.status === 200) {
+      const favExisted = checkFavorite.data.favorite;
       let type = 2;
       if (favorite) type = 1;
-      let dataUpdate = { ...checkFavorite.data, type };
+      let dataUpdate = { ...favExisted, type };
       await favoriteRequest.update(dataUpdate);
 
-      if (checkFavorite.data.type === 1) {
+      if (favExisted.type === 1) {
         if (type === 2) {
           setNumberLove((pre) => pre - 1); // đã thích sẵn và giờ không thích nữa
         }
@@ -141,11 +156,11 @@ const PostDetailPage = (props) => {
       let type = 2;
       if (favorite) type = 1;
       let dataPost = {
-        userId: userStore.current.id,
         postId,
         type,
       };
-      await favoriteRequest.create(dataPost);
+      const res = await favoriteRequest.create(dataPost);
+      dispatch(actions.otherMethods(res));
       if (type === 1) {
         setNumberLove((pre) => pre + 1);
       }
@@ -246,7 +261,7 @@ const PostDetailPage = (props) => {
               <></>
             )}
           </ListItem>
-          {allCmtRender.map((comment, index) => {
+          {allCmtAtCurrentPost.map((comment, index) => {
             if (comment.postId === postId)
               return (
                 <CommentItem

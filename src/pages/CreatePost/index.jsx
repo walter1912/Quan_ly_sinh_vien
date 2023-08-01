@@ -8,7 +8,7 @@ const CreatePost = (props) => {
   // KIỂM TRA ROLE
   const userStore = useSelector((state) => state.user);
   var isCreate = false;
-  if (userStore.current.role === 1) {
+  if (userStore.current.role !== 1) {
     isCreate = true;
   }
   return isCreate ? (

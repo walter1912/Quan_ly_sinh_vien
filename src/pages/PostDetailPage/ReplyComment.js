@@ -11,7 +11,6 @@ function ReplyComment(props) {
   const [messageAlert, setMessageAlert] = useState("Bạn vừa gửi câu trả lời");
   const [severity, setSeverity] = useState("success");
   async function handleReplyCmt() {
-    try {
       let data = {
         content: messageComment,
         postId: comment.postId,
@@ -19,18 +18,13 @@ function ReplyComment(props) {
         userId: currentUser.id,
         level: comment.level + 1,
       };
-     
       const res = await commentRequest.create(data, dispatch);
-
-      if (res.status === 200) setMessageAlert(`Bạn vừa gửi câu trả lời cho ${user.ten}`);
-      else {
-        setMessageAlert(JSON.stringify(res.err.data.errors.content));
-        console.log("res.err: ", res.err);
+      setMessageAlert(res.data.message);
+      if (res.status === 200) {
+        setSeverity("success");
+      } else {
         setSeverity("error");
       }
-    } catch (err) {
-      console.log(err);
-    }
   }
 
   return (

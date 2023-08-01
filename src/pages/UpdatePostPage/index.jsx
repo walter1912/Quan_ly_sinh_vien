@@ -8,6 +8,7 @@ import { userRequest } from "../../services/user/userRequest";
 import Grid from "@mui/material/Unstable_Grid2";
 import Editor from "../CreatePost/Editor";
 import ErrorPage from "../ErrorPage";
+import { actions } from "../../services/response/responseSlice";
 
 const UpdatePostPage = (props) => {
   let { postId } = useParams();
@@ -23,17 +24,21 @@ const UpdatePostPage = (props) => {
   // lấy dữ liệu bài viết
   useEffect(() => {
     async function handle() {
-      await postRequest.getById(postId, dispatch);
+      const resP = await postRequest.getById(postId, dispatch);
+      dispatch(actions.otherMethods(resP));
 
-      var userPost = await userRequest.getById(postStore.current.userId);
-      var post = {
-        ...postStore.current,
-        username: userPost.username,
-      };
-      setCurrentPost(post);
+      var resU = await userRequest.getById(postStore.current.userId);
+      dispatch(actions.otherMethods(resU));
+      if(resU.status === 200) {
+        var post = {
+          ...postStore.current,
+          username: resU.data.username,
+        };
+        setCurrentPost(post);
+      }
     }
     handle();
-  }, [dispatch, postId, postStore]);
+  }, []);
   return (
       checkEditable ? <Grid
         container

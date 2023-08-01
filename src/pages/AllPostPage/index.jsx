@@ -15,7 +15,7 @@ const AllPostPage = (props) => {
       dispatch(actions.otherMethods(res));
     }
     handle();
-  }, [dispatch]);
+  }, []);
   return (
     <div>
       <HrHeader style={{ marginBottom: "20px" }}>

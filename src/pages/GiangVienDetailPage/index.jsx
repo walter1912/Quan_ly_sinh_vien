@@ -43,12 +43,12 @@ const GiangVienDetailPage = (props) => {
         const resP = await giangvienRequest.getAllPostByMaGV(
           giangVienStore.current.maGV
         );
-        setListPost(resP.data.posts);
+        if(resP.status === 200) setListPost(resP.data.posts);
         dispatch(actions.otherMethods(resP));
       }
     }
     handle();
-  }, [viewPosts,viewSinhViens, dispatch, giangVienId, giangVienStore]);
+  }, []);
 
   console.log("list post: ", listPost);
   return (

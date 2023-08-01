@@ -13,6 +13,7 @@ import { useDispatch} from "react-redux";
 import { userRequest } from "../../services/user/userRequest";
 
 import ReplyComment from "./ReplyComment";
+import { actions } from "../../services/response/responseSlice";
 
 const CommentItem = (props) => {
   const { comment, handleViewRepCmt,  currentUser } = props;
@@ -26,31 +27,30 @@ const CommentItem = (props) => {
   useEffect(() => {
     const change = async () => {
       let userRes = await userRequest.getById(comment.userId);
-      let inforUser = await userRequest.getInfor(userRes, dispatch, false);
+      if(userRes.status !== 200) {
+        dispatch(actions.otherMethods(userRes));
+      }
+      let inforUser = await userRequest.getInfor(userRes.data.user, dispatch, false);
       let ten = "";
       let ma = "";
-
-      if (userRes.username.includes("GV")) {
-        ten = inforUser.tenGV;
-        ma = inforUser.maGV;
-        delete inforUser.tenGV;
-        delete inforUser.maGV;
+      const {user} = inforUser.data;
+      if (userRes.data.user.username.includes("GV")) {
+        ten = user.tenGV;
+        ma = user.maGV;
       } else {
-        ten = inforUser.tenSV;
-        ma = inforUser.maSV;
-        delete inforUser.tenSV;
-        delete inforUser.maSV;
+        ten = user.tenSV;
+        ma = user.maSV;
       }
-      inforUser = { ...inforUser, ten, ma };
+      user = { ...user, ten, ma };
 
-      setUser(inforUser);
+      setUser(user);
     };
     change();
-  }, [comment.userId, dispatch]);
+  }, [dispatch]);
 
   function handleViewCmt() {
     setViewMore(!viewMore);
-    try {
+   
       if (viewMore) {
         handleViewRepCmt(comment.id);
       }
@@ -67,9 +67,7 @@ const CommentItem = (props) => {
         Array.from(allRepCmt).forEach((ele) => (ele.style.display = "block"));
         return;
       }
-    } catch (err) {
-      console.log("hfskgfsa");
-    }
+  
   }
 
   return (
@@ -91,7 +89,7 @@ const CommentItem = (props) => {
                 variant="body2"
                 color="text.primary"
               >
-                {moment(comment.createAt).format("DD-MM, h:mm:ss a")}
+                {moment(comment.createdAt).format("DD-MM, h:mm:ss a")}
               </Typography>
               <p>{comment.content}</p>
               <div

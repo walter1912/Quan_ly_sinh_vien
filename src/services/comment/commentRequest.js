@@ -6,32 +6,32 @@ export const commentRequest = {
   create: async function (data, dispatch) {
     try {
       let url = `/Comments`;
-      let createAt = new Date().toISOString();
-      //data = {postId, userId, repCommentId, content }
-      let dataPost = { ...data, createAt };
-      console.log("datapost comment:", dataPost);
-      const res = await axiosInstance.post(url, dataPost);
+      
+      const res = await axiosInstance.post(url, data);
       console.log("Kết quả khi thêm bình luận: ", res.data);
-      dispatch(add(res.data));
-      return { status: 200 };
+      if (res.status === 201) {
+        dispatch(add(res.data.comment));
+      }
+      return res;
     } catch (err) {
       console.log("Lỗi khi thêm comment: ", err);
-      return { err: err, status: 400 };
+      return err;
     }
   },
   getAllCommentByPostId: async function (postId, dispatch) {
     try {
       let url = `/Comments/post/${postId}`;
       const res = await axiosInstance.get(url);
-      console.log("Kết quả khi lấy danh sách bình luận của bài viết =", res.data);
-      dispatch(updateAllCmt(res.data.comments));
-
-      const renderCmt = res.data.comments.filter(
-        (cmt) => cmt.repCommentId === 0
-      );
-      dispatch(updateRenderCmt(renderCmt));
+      if (res.status === 200) {
+        dispatch(updateAllCmt(res.data.comments));
+        const renderCmt = res.data.comments.filter(
+          (cmt) => cmt.level === 0
+        );
+        dispatch(updateRenderCmt(renderCmt));
+      }
+      return res;
     } catch (err) {
-      console.log("Lỗi khi lấy danh sách cmt by postId = ", postId, err);
+     return err;
     }
   },
 };
